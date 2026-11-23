@@ -1,7 +1,9 @@
+
 export interface NavItem {
   label: string;
   href: string;
-  iconName: 'home' | 'about' | 'skills' | 'projects' | 'contact';
+  iconName: 'home' | 'about' | 'skills' | 'projects' | 'contact'
+    | 'user' | 'code' | 'folder' | 'mail';
 }
 
 export interface SocialLink {
@@ -69,7 +71,26 @@ export interface CertificationItem {
   badgeText: string;
 }
 
-export type ProjectFilterType = 'All' | 'Full Stack' | 'Frontend' | 'Backend';
+export type ProjectFilterType =
+  | 'All'
+  | 'Full Stack'
+  | 'Frontend'
+  | 'Backend';
+
+export type ProjectIconType =
+  | 'education'
+  | 'restaurant'
+  | 'pg'
+  | 'fintech'
+  | 'building'
+  | 'ai'
+  | 'video'
+  | 'food'
+  | 'image'
+  | 'notes'
+  | 'service'
+  | 'portfolio'
+  | 'code';
 
 export interface ProjectItem {
   id: string;
@@ -82,7 +103,7 @@ export interface ProjectItem {
   technologies: string[];
   githubUrl?: string;
   liveDemoUrl?: string;
-  iconType: 'education' | 'restaurant' | 'pg' | 'fintech';
+  iconType: ProjectIconType;
 }
 
 export interface ContactInfo {
