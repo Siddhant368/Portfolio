@@ -9,7 +9,6 @@ import {
   Sparkles,
   UtensilsCrossed,
   Code2,
-  Globe,
   Image,
   BookOpen,
   Briefcase,
@@ -23,10 +22,26 @@ interface ProjectThumbnailProps {
   project: ProjectItem;
 }
 
+// Complete supported icon types
+type ThumbnailIconType =
+  | "education"
+  | "restaurant"
+  | "pg"
+  | "fintech"
+  | "building"
+  | "ai"
+  | "video"
+  | "food"
+  | "image"
+  | "notes"
+  | "service"
+  | "portfolio"
+  | "code";
+
 export function ProjectThumbnail({
   project,
 }: ProjectThumbnailProps) {
-  const getThumbnailConfig = (iconType: ProjectItem["iconType"]) => {
+  const getThumbnailConfig = (iconType: ThumbnailIconType) => {
     switch (iconType) {
       case "education":
         return {
@@ -140,7 +155,10 @@ export function ProjectThumbnail({
     }
   };
 
-  const config = getThumbnailConfig(project.iconType);
+  // Type-safe category mapping
+  const config = getThumbnailConfig(
+    project.iconType as ThumbnailIconType
+  );
 
   return (
     <div className="relative w-full h-48 sm:h-52 rounded-xl bg-zinc-950 overflow-hidden border border-white/[0.06] flex flex-col justify-between p-4 group-hover:border-purple-500/40 transition-colors duration-300">
