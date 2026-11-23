@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from "react";
@@ -10,17 +11,14 @@ import {
   MapPin,
   Sparkles,
 } from "lucide-react";
+
 import { CONTACT_INFO } from "@/data/portfolio-data";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
 function GithubIcon({ className = "w-5 h-5" }: { className?: string }) {
   return (
-    <svg
-      className={`${className} fill-current`}
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
+    <svg className={`${className} fill-current`} viewBox="0 0 24 24" aria-hidden="true">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -32,11 +30,7 @@ function GithubIcon({ className = "w-5 h-5" }: { className?: string }) {
 
 function LinkedinIcon({ className = "w-5 h-5" }: { className?: string }) {
   return (
-    <svg
-      className={`${className} fill-current`}
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
+    <svg className={`${className} fill-current`} viewBox="0 0 24 24" aria-hidden="true">
       <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9h2.79v8.37H6.46V10.9M7.86 6.5a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26z" />
     </svg>
   );
@@ -45,10 +39,14 @@ function LinkedinIcon({ className = "w-5 h-5" }: { className?: string }) {
 export function ContactInfoCard() {
   const [copied, setCopied] = useState(false);
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(CONTACT_INFO.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText("siddhantsingh0319@gmail.com");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch (error) {
+      console.error("Failed to copy email:", error);
+    }
   };
 
   return (
@@ -60,36 +58,38 @@ export function ContactInfoCard() {
       className="flex flex-col justify-between h-full space-y-8"
     >
       <div>
-        {/* Availability Status Badge */}
         <div className="mb-6">
-          <Badge variant="success">{CONTACT_INFO.availability}</Badge>
+          <Badge variant="success">
+            {CONTACT_INFO.availability}
+          </Badge>
         </div>
 
         <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white mb-4 tracking-tight">
-          Let&apos;s talk about your next big project.
+          Let's talk about your next big project.
         </h3>
 
         <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed mb-8">
-          Whether you have an upcoming project, freelance opportunity, or full-time position in mind, feel free to reach out. I am always open to exploring modern technical challenges.
+          Whether you have an upcoming project, freelance opportunity,
+          or full-time position in mind, feel free to reach out.
+          I am always open to exploring modern technical challenges.
         </p>
 
-        {/* Info Grid */}
+        {/* Contact Information */}
         <div className="space-y-4 mb-8">
-          {/* Email Item */}
           <div className="p-4 rounded-xl bg-white/80 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-white/[0.08] backdrop-blur-md flex items-center justify-between gap-3 shadow-sm">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 min-w-0">
               <div className="p-2.5 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">
                 <Mail className="w-5 h-5" />
               </div>
-              <div>
+              <div className="min-w-0">
                 <span className="block text-[11px] font-mono uppercase tracking-wider text-zinc-500">
                   Email
                 </span>
                 <a
-                  href={`mailto:${CONTACT_INFO.email}`}
-                  className="text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:text-purple-600 dark:hover:text-purple-300 transition-colors"
+                  href="mailto:siddhantsingh0319@gmail.com"
+                  className="text-sm font-medium text-zinc-800 dark:text-zinc-200 hover:text-purple-600 dark:hover:text-purple-300 transition-colors break-all"
                 >
-                  {CONTACT_INFO.email}
+                  siddhantsingh0319@gmail.com
                 </a>
               </div>
             </div>
@@ -98,18 +98,18 @@ export function ContactInfoCard() {
               type="button"
               onClick={handleCopyEmail}
               aria-label="Copy email address"
-              className="p-2 rounded-lg text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white bg-zinc-100 dark:bg-zinc-800/60 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-white/[0.06] transition-colors cursor-pointer"
               title="Copy email address"
+              className="shrink-0 p-2 rounded-lg text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white bg-zinc-100 dark:bg-zinc-800/60 hover:bg-zinc-200 dark:hover:bg-zinc-800 border border-zinc-200 dark:border-white/[0.06] transition-colors cursor-pointer"
             >
               {copied ? (
-                <Check className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
+                <Check className="w-4 h-4 text-emerald-500" />
               ) : (
                 <Copy className="w-4 h-4" />
               )}
             </button>
           </div>
 
-          {/* Location Item */}
+          {/* Location */}
           <div className="p-4 rounded-xl bg-white/80 dark:bg-zinc-900/60 border border-zinc-200/80 dark:border-white/[0.08] backdrop-blur-md flex items-center gap-3 shadow-sm">
             <div className="p-2.5 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
               <MapPin className="w-5 h-5" />
@@ -130,9 +130,11 @@ export function ContactInfoCard() {
           <span className="block text-xs font-mono uppercase tracking-wider text-zinc-500 mb-3">
             Connect on Professional Networks
           </span>
+
           <div className="flex items-center gap-3">
+            {/* GitHub */}
             <a
-              href={CONTACT_INFO.githubUrl}
+              href="https://github.com/Siddhant368"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile"
@@ -141,8 +143,9 @@ export function ContactInfoCard() {
               <GithubIcon className="w-5 h-5" />
             </a>
 
+            {/* LinkedIn */}
             <a
-              href={CONTACT_INFO.linkedinUrl}
+              href="https://www.linkedin.com/in/siddhant-singh-sp0319"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
@@ -154,16 +157,18 @@ export function ContactInfoCard() {
         </div>
       </div>
 
-      {/* Resume Download CTA */}
+      {/* Resume Download */}
       <div className="pt-6 border-t border-zinc-200 dark:border-white/[0.06]">
         <div className="p-5 rounded-2xl bg-gradient-to-br from-purple-100/60 via-white to-white dark:from-purple-900/20 dark:via-zinc-900/60 dark:to-zinc-900/40 border border-purple-500/20 backdrop-blur-xl shadow-sm">
           <div className="flex items-center gap-2 text-xs font-mono text-purple-700 dark:text-purple-300 mb-2">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Looking for full qualifications?</span>
           </div>
+
           <h4 className="text-base font-bold text-zinc-900 dark:text-white mb-3">
             Download Complete Curriculum Vitae
           </h4>
+
           <Button
             variant="secondary"
             size="md"
